@@ -1,50 +1,102 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-myapp(){
-  var mytext =Text("Hello Parth First App",
-  textDirection: TextDirection.ltr,
-  //textAlign: TextAlign.center,
+
+myapp1(){
+  FlutterStatusbarcolor.setStatusBarColor(Colors.blue);
+  myprint(){
+    print("hello parth here");
+  }
+  mytost(){
+    Fluttertoast.showToast(
+        msg: "This is is your Profile",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 5,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+  }
+
+    var mybody = Container(
+    alignment: Alignment.center,
+    width:double.maxFinite,
+    height:double.maxFinite,
+    color: Colors.red,
+    margin: EdgeInsets.all(20),
+
+    child: Stack(
+      alignment: Alignment.topCenter,
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(   
+          color:Colors.amber,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(
+           color: Colors.black,
+            width: 5,
+            ),),
+          margin: EdgeInsets.all(50),
+          //alignment: Alignment.center,
+           width:500,
+           height:180,
+          //color:Colors.red,
+           child:Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:<Widget>[
+            Text("Parth Deokar",  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),),
+            Row(mainAxisAlignment:MainAxisAlignment.center,
+              children: <Widget>[
+              Icon(Icons.email),
+              Text("parth@gmail.com",  style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+            ],),
+           ]
+           )
+           ),
+           InkWell( 
+             // we can use GestureDetection()
+            onTap: myprint,
+                  child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage("https://raw.githubusercontent.com/parthdeokar/Flutter_App/master/149.jpg"),
+              fit: BoxFit.cover,
+                ),
+              color:Colors.green,
+              borderRadius: BorderRadius.circular(50),
+              border: Border.all(
+             color: Colors.red,
+              width: 5,
+            ),
+            ),
+            //margin: EdgeInsets.all(30),
+            //padding: EdgeInsets.only(left:10),
+            alignment: Alignment.center,
+             width:100,
+             height:100,
+            //color:Colors.amber,
+            //child: Text("Second"),                
+          ),
+        ),
+            ]    
+    ),
+
   );
-  mypress(){
-    print("some one click on Email... ");
-  }
-  mypress2(){
-    print("someone click on Calander");
-  }
-  mypress3(){
-    print("alert buttion");
-  }
-  var url = "https://raw.githubusercontent.com/parthdeokar/Flutter_App/master/WhatsApp%20Image%202020-04-29%20at%2001.50.11.jpeg";
-  var myImages = Image.network(
-    url,
-    height: double.infinity,
-    width: double.infinity,
-    );
-  var MyemailIcon =Icon(Icons.email,color: Colors.black,);
-  var mycalandericon=Icon(Icons.calendar_today);
-  var myalert=Icon(Icons.add_alert);
-  var myaccessibility=Icon(Icons.accessibility);
-  var myemailiconbutton = IconButton(icon: MyemailIcon, onPressed: mypress);
-  var mycalandericonbutton = IconButton(icon: mycalandericon, onPressed: mypress2);
-  var myalerticonbutton =IconButton(icon: myalert, onPressed: mypress3 );
-  var myappbar = AppBar(
-    title:mytext,
-    backgroundColor: Colors.red,
-    leading: myaccessibility,
-    actions: <Widget>[myalerticonbutton,myemailiconbutton,mycalandericonbutton],
-    );
-   
-  var myhome =Scaffold(
-    appBar:myappbar,
-    body: myImages,
-    backgroundColor: Colors.greenAccent,
-    );
-  
-  var design = MaterialApp(
-    home: myhome,
+  return MaterialApp(
     debugShowCheckedModeBanner: false,
-  );
-  return design;
+    home:Scaffold(
+      appBar: AppBar(
+        title: Text("My Profile"),
+        backgroundColor : Colors.amber,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.add_a_photo), onPressed: null),
+          IconButton(icon: Icon(Icons.account_circle), onPressed: mytost),
+                  ],
+        ),
+      body: mybody,  ),
+       );
 }
-
